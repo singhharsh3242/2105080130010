@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Average Calculator</title>
+</head>
+<body>
+    <h1>Calculator For CalculatingAverage Of Numbers</h1>
+    <form id="averageForm">
+        <label for="numbers">Enter the  numbers that are separated by commas:</label><br>
+        <input type="text" id="numbers" name="numbers" required><br><br>
+        <button type="submit">Calculate the  Average of the number</button>
+    </form>
+
+    <p id="result"></p>
+
+    <script>
+        document.getElementById('averageForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const numbers = document.getElementById('numbers').value.split(',').map(num => parseFloat(num));
+
+            const response = await fetch('http://localhost:9876/calculate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ numbers })
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                document.getElementById('result').textContent = Average: ${data.average};
+            } else {
+                document.getElementById('result').textContent = Error: ${data.message};
+            }
+        });
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Average Calculator</title>
+</head>
+<body>
+    <h1>Calculator for Calculating the Average of the number</h1>
+    <form id="averageForm">
+        <label for="numbers">Enter the numbers separated by commas:</label><br>
+        <input type="text" id="numbers" name="numbers" required><br><br>
+        <button type="submit">Calculate the Average of the numbers</button>
+    </form>
+
+    <p id="result"></p>
+
+    <script>
+        document.getElementById('averageForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const numbers = document.getElementById('numbers').value.split(',').map(num => parseFloat(num));
+
+            const response = await fetch('http://localhost:9876/calculate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ numbers })
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                document.getElementById('result').textContent = Average: ${data.average};
+            } else {
+                document.getElementById('result').textContent = Error: ${data.message};
+            }
+        });
+    </script>
+</body>
+</html>
